@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rej3D.Plugins", "Rej3D.Plugins.csproj", "{C7FED7BB-27F8-68C7-7EDE-79A6A836DA65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rej3D.Editor.Plugins", "Rej3D.Editor.Plugins.csproj", "{8F103C59-8ACD-8786-B333-9B735583B64F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7FED7BB-27F8-68C7-7EDE-79A6A836DA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FED7BB-27F8-68C7-7EDE-79A6A836DA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FED7BB-27F8-68C7-7EDE-79A6A836DA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FED7BB-27F8-68C7-7EDE-79A6A836DA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F103C59-8ACD-8786-B333-9B735583B64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F103C59-8ACD-8786-B333-9B735583B64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F103C59-8ACD-8786-B333-9B735583B64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F103C59-8ACD-8786-B333-9B735583B64F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

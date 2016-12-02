@@ -1,0 +1,6 @@
+*.bin
+Library/
+Assets/Standard Assets/
+Temp/
+rej3d_Data/
+*.exe
