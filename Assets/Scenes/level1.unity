@@ -105,7 +105,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4769633858627952, guid: 3a28e6ca7909c1c4d9d4b5bda16142d5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 41.1
+      value: 41.14
       objectReference: {fileID: 0}
     - target: {fileID: 4769633858627952, guid: 3a28e6ca7909c1c4d9d4b5bda16142d5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -159,6 +159,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &428109579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428109577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381190e28ea25c64ab3c14938d9d9bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Acceleration: 50
+  MaxSpeed: 20
+--- !u!65 &428109580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428109577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.5, z: 3.1}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &1138920437
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +332,7 @@ GameObject:
   - component: {fileID: 1493451865}
   m_Layer: 0
   m_Name: 3rdPersonCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
