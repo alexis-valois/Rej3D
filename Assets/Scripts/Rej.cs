@@ -11,7 +11,6 @@ using UnityEngine;
  */
 public class Rej : MonoBehaviour
 {
-
     // Public variables that will show up in the Editor
     public float maxWalkSpeed = 60f;
     public float maxTurnSpeed = 80f;
@@ -19,8 +18,6 @@ public class Rej : MonoBehaviour
     Animator anim;
     Rigidbody rBody;
     private bool isGrounded = false;
-
-    public float MaxGroundDistance;
 
     void Start()
     {
@@ -41,23 +38,58 @@ public class Rej : MonoBehaviour
             Jump();
         }
 
-        if (walkSpeed > 5)
+        ResetGroundAnimParameters();
+
+        //if (walkSpeed > 5 && isGrounded)
+        //{
+        //    anim.SetInteger("Speed", 1);
+        //    //anim.Play("Walk");
+        //    anim.speed = 2;
+        //}
+
+        if (isGrounded)
         {
-            anim.Play("Walk");
-            anim.speed = 2;
+            anim.SetBool("AboveGround", false);
         }
         else
         {
-            anim.Play("Idle");
-            anim.speed = 1;
+            anim.SetBool("AboveGround", true);
         }
+
+        if (walkSpeed > 5)
+        {
+            anim.SetInteger("Speed", 1);
+        }else
+        {
+            anim.SetInteger("Speed", 0);
+        }
+
+        //if (walkSpeed == 0 || !isGrounded)
+        //{
+        //    anim.SetInteger("Speed", 0);
+        //    anim.Play("Idle");
+        //    anim.speed = 1;
+        //}
+    }
+
+    private void ResetGroundAnimParameters()
+    {
+        if (anim.GetBool("GroundEnter"))
+            anim.SetBool("GroundEnter", false);
+
+        if (anim.GetBool("GroundExit"))
+            anim.SetBool("GroundExit", false);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Ground"))
         {
-            this.isGrounded = true;
+            //anim.Play("Land");
+            anim.SetBool("GroundEnter", true);
+            
+            anim.speed = 1;
+            isGrounded = true;
         }        
     }
 
@@ -65,14 +97,21 @@ public class Rej : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
-            this.isGrounded = false;
+            
+            anim.SetBool("GroundExit", true);
+            //anim.Play("Jump");
+            anim.speed = 1;
+            isGrounded = false;
         }        
     }
 
     private void Jump()
     {
-        if (this.isGrounded)
+        if (isGrounded)
         {
+            //anim.SetBool("AboveGround", true);
+            //anim.SetBool("GroundExit", false);
+            //anim.SetBool("GroundEnter", false);
             anim.Play("Jump");
             rBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
