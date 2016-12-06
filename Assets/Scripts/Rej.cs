@@ -29,11 +29,15 @@ public class Rej : MonoBehaviour
     {
         var walkSpeed = Input.GetAxis("Vertical") * maxWalkSpeed;
         var turnSpeed = Input.GetAxis("Horizontal") * maxTurnSpeed;
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            transform.Rotate(Vector3.up, 180);
+        }
 
         if (walkSpeed < 0)
         {
             walkSpeed = (walkSpeed * -1);
-            transform.Rotate(Vector3.up, 180);
         }
 
         transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime);
