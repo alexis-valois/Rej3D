@@ -29,7 +29,7 @@ public class Rej : MonoBehaviour
     {
         var walkSpeed = Input.GetAxis("Vertical") * maxWalkSpeed;
         var turnSpeed = Input.GetAxis("Horizontal") * maxTurnSpeed;
-        
+
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.Rotate(Vector3.up, 180);
@@ -57,15 +57,24 @@ public class Rej : MonoBehaviour
         else
         {
             anim.SetBool("AboveGround", true);
+            AjustFallSpeed();
         }
 
         if (walkSpeed > 0)
         {
             anim.SetInteger("Speed", 1);
-        }else
+        }
+        else
         {
             anim.SetInteger("Speed", 0);
         }
+    }
+
+    private void AjustFallSpeed()
+    {
+        Vector3 vel = rBody.velocity;
+        vel.y -= 5 * Time.deltaTime;
+        rBody.velocity = vel;
     }
 
     private void AjustAnimationSpeed()
@@ -73,10 +82,12 @@ public class Rej : MonoBehaviour
         if (IsAnimationPlaying("Walk"))
         {
             anim.speed = 2;
-        } else if (IsAnimationPlaying("Jump"))
+        }
+        else if (IsAnimationPlaying("Jump"))
         {
             anim.speed = 3;
-        } else if (IsAnimationPlaying("Land"))
+        }
+        else if (IsAnimationPlaying("Land"))
         {
             anim.speed = 3;
         }
@@ -89,7 +100,6 @@ public class Rej : MonoBehaviour
     private bool IsAnimationPlaying(string name)
     {
         var animatorState = anim.GetCurrentAnimatorStateInfo(0);
-        var hash = Animator.StringToHash("Jump");
         return animatorState.IsName(name);
     }
 
@@ -104,12 +114,17 @@ public class Rej : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.name == "tasse")
+        {
+            Destroy(collision.gameObject);
+        }
+
         if (collision.collider.CompareTag("Ground"))
         {
             anim.SetBool("GroundEnter", true);
             anim.speed = 1;
             isGrounded = true;
-        }        
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -119,12 +134,12 @@ public class Rej : MonoBehaviour
             anim.SetBool("GroundExit", true);
             anim.speed = 1;
             isGrounded = false;
-        }        
+        }
     }
 
     public void DelayJumpAfterAnimation()
     {
-        rBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+       rBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     private void Jump()
