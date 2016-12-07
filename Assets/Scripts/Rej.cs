@@ -18,9 +18,11 @@ public class Rej : MonoBehaviour
     Animator anim;
     Rigidbody rBody;
     private bool isGrounded = false;
+    private int cafeCount;
 
     void Start()
     {
+        cafeCount = 0;
         anim = GetComponent<Animator>();
         rBody = GetComponent<Rigidbody>();
     }
@@ -116,6 +118,7 @@ public class Rej : MonoBehaviour
     {
         if (collision.gameObject.name == "tasse")
         {
+            cafeCount++;
             Destroy(collision.gameObject);
         }
 
