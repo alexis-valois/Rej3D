@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 /*
  * Code source inspiré de  : 
@@ -8,6 +9,7 @@ using UnityEngine;
  * http://answers.unity3d.com/questions/9246/playing-an-animation-while-moving-a-character-forw.html
  * http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html
  * http://wiki.unity3d.com/index.php?title=RigidbodyFPSWalker
+ * https://unity3d.com/fr/learn/tutorials/projects/roll-ball-tutorial/displaying-score-and-text
  */
 public class Rej : MonoBehaviour
 {
@@ -19,10 +21,12 @@ public class Rej : MonoBehaviour
     Rigidbody rBody;
     private bool isGrounded = false;
     private int cafeCount;
+    public Text cafeCountText;
 
     void Start()
     {
         cafeCount = 0;
+        SetCafeCountText();
         anim = GetComponent<Animator>();
         rBody = GetComponent<Rigidbody>();
     }
@@ -114,11 +118,17 @@ public class Rej : MonoBehaviour
             anim.SetBool("GroundExit", false);
     }
 
+    void SetCafeCountText()
+    {
+        cafeCountText.text = "Nombre de cafés : " + cafeCount.ToString();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "tasse")
+        if (collision.gameObject.tag == "Cafe")
         {
             cafeCount++;
+            SetCafeCountText();
             Destroy(collision.gameObject);
         }
 
