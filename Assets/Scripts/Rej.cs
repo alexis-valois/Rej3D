@@ -76,12 +76,6 @@ public class Rej : MonoBehaviour
         transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(transform.position, -transform.up, out hit))
-        //{
-        //    transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * Quaternion.Euler(transform.rotation.eulerAngles);
-        //}        
-
         AjustAnimationSpeed();
         ResetGroundAnimParameters();
     }
