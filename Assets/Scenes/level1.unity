@@ -636,8 +636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381190e28ea25c64ab3c14938d9d9bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWalkSpeed: 60
-  maxTurnSpeed: 200
+  maxWalkSpeed: 20
+  maxTurnSpeed: 100
+  forceIncreaseFactor: 0.15
   jumpForce: 1000
   cafeCountText: {fileID: 1985904733}
 --- !u!65 &428109580

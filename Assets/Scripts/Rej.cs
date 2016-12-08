@@ -13,19 +13,25 @@ using UnityEngine;
  */
 public class Rej : MonoBehaviour
 {
-    // Public variables that will show up in the Editor
     public float maxWalkSpeed = 60f;
     public float maxTurnSpeed = 80f;
+    public float forceIncreaseFactor = 0.15f;
     public float jumpForce = 5f;
-    Animator anim;
-    Rigidbody rBody;
+    public Text cafeCountText;
+
+    private Animator anim;
+    private Rigidbody rBody;
     private bool isGrounded = false;
     private int cafeCount;
-    public Text cafeCountText;
+    private float walkSpeed;
+    private float turnSpeed;
+
 
     void Start()
     {
         cafeCount = 0;
+        walkSpeed = 0;
+        turnSpeed = 0;
         SetCafeCountText();
         anim = GetComponent<Animator>();
         rBody = GetComponent<Rigidbody>();
@@ -33,32 +39,19 @@ public class Rej : MonoBehaviour
 
     void FixedUpdate()
     {
-        var walkSpeed = Input.GetAxis("Vertical") * maxWalkSpeed;
-        var turnSpeed = Input.GetAxis("Horizontal") * maxTurnSpeed;
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            transform.Rotate(Vector3.up, 180);
-        }
-
-        if (walkSpeed < 0)
-        {
-            walkSpeed = (walkSpeed * -1);
-        }
-
-        transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Jump();
-        }
-        AjustAnimationSpeed();
-        ResetGroundAnimParameters();
-
         if (isGrounded)
         {
+            walkSpeed = Input.GetAxis("Vertical") * (maxWalkSpeed + GetForceIncrease(maxWalkSpeed));
+            turnSpeed = Input.GetAxis("Horizontal") * (maxTurnSpeed + GetForceIncrease(maxTurnSpeed));
             anim.SetBool("AboveGround", false);
+            if (walkSpeed < 0)
+            {
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    transform.Rotate(Vector3.up, 180);
+                }
+                walkSpeed = (walkSpeed * -1);
+            }
         }
         else
         {
@@ -68,12 +61,28 @@ public class Rej : MonoBehaviour
 
         if (walkSpeed > 0)
         {
-            anim.SetInteger("Speed", 1);
+            anim.SetInteger("Speed", 1);       
         }
         else
         {
             anim.SetInteger("Speed", 0);
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Jump();
+        }
+
+        transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+
+        AjustAnimationSpeed();
+        ResetGroundAnimParameters();
+    }
+
+    private float GetForceIncrease(float force)
+    {
+        return force + (force * (cafeCount * forceIncreaseFactor));
     }
 
     private void AjustFallSpeed()
@@ -152,7 +161,7 @@ public class Rej : MonoBehaviour
 
     public void DelayJumpAfterAnimation()
     {
-       rBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+       rBody.AddForce(Vector3.up * GetForceIncrease(jumpForce), ForceMode.Impulse);
     }
 
     private void Jump()
