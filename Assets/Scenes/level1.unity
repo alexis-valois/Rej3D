@@ -722,8 +722,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWalkSpeed: 20
-  maxTurnSpeed: 100
-  forceIncreaseFactor: 0.15
+  maxTurnSpeed: 80
+  forceIncreaseFactor: 0.75
   jumpForce: 1000
   cafeCountText: {fileID: 1985904733}
 --- !u!65 &428109580
