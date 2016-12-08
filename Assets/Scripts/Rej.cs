@@ -61,7 +61,7 @@ public class Rej : MonoBehaviour
 
         if (walkSpeed > 0)
         {
-            anim.SetInteger("Speed", 1);       
+            anim.SetInteger("Speed", 1);
         }
         else
         {
@@ -75,6 +75,12 @@ public class Rej : MonoBehaviour
 
         transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+
+        //RaycastHit hit;
+        //if (Physics.Raycast(transform.position, -transform.up, out hit))
+        //{
+        //    transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * Quaternion.Euler(transform.rotation.eulerAngles);
+        //}        
 
         AjustAnimationSpeed();
         ResetGroundAnimParameters();
@@ -161,7 +167,7 @@ public class Rej : MonoBehaviour
 
     public void DelayJumpAfterAnimation()
     {
-       rBody.AddForce(Vector3.up * GetForceIncrease(jumpForce), ForceMode.Impulse);
+        rBody.AddForce(Vector3.up * GetForceIncrease(jumpForce), ForceMode.Impulse);
     }
 
     private void Jump()
