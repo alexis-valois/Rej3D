@@ -28,9 +28,9 @@ public class FollowCamera : MonoBehaviour {
     void Start ()
     {
         cameraModes = new List<KeyValuePair<float, float>>(3);
-        cameraModes.Add(new KeyValuePair<float, float>(5.0f, 75.0f));
-        cameraModes.Add(new KeyValuePair<float, float>(10.0f, 90.0f));
-        cameraModes.Add(new KeyValuePair<float, float>(15.0f, 160.0f));
+        cameraModes.Add(new KeyValuePair<float, float>(5.0f, 25.0f));
+        cameraModes.Add(new KeyValuePair<float, float>(10.0f, 50.0f));
+        cameraModes.Add(new KeyValuePair<float, float>(15.0f, 80.0f));
 
         currentHeight = cameraModes[0].Key;
         currentDistance = cameraModes[0].Value;
