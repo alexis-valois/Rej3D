@@ -1,6 +1,4 @@
 *.bin
 Library/
 Temp/
-rej3d_Data/
-*.exe
 .vs/
