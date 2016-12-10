@@ -41,8 +41,8 @@ public class Rej : MonoBehaviour
     {
         if (isGrounded)
         {
-            walkSpeed = Input.GetAxis("Vertical") * (maxWalkSpeed + GetForceIncrease(maxWalkSpeed));
-            turnSpeed = Input.GetAxis("Horizontal") * (maxTurnSpeed + GetForceIncrease(maxTurnSpeed));
+            walkSpeed = Input.GetAxis("Vertical") * GetForceIncrease(maxWalkSpeed);
+            turnSpeed = Input.GetAxis("Horizontal") * maxTurnSpeed;
             anim.SetBool("AboveGround", false);
             if (walkSpeed < 0)
             {
@@ -161,7 +161,7 @@ public class Rej : MonoBehaviour
 
     public void DelayJumpAfterAnimation()
     {
-        rBody.AddForce(Vector3.up * GetForceIncrease(jumpForce), ForceMode.Impulse);
+        rBody.AddForce(Vector3.up * (GetForceIncrease(jumpForce) / 2), ForceMode.Impulse);
     }
 
     private void Jump()
